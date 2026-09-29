@@ -37,40 +37,73 @@ const getGeminiClient = () => {
   });
 };
 
-// Resilient wrapper with exponential backoff for Gemini API calls
+// Resilient wrapper with exponential backoff & multi-model fallback for Gemini API calls
 async function callGeminiWithRetry(options: any, maxRetries = 2) {
-  let attempt = 0;
-  while (true) {
-    try {
-      const ai = getGeminiClient();
-      return await ai.models.generateContent(options);
-    } catch (err: any) {
-      attempt++;
-      const isHardQuotaExceeded =
-        err.message?.includes('RESOURCE_EXHAUSTED') ||
-        err.message?.includes('resource_exhausted') ||
-        err.message?.includes('Quota exceeded') ||
-        err.message?.includes('quota exceeded');
+  // Put active available models first to avoid quota exhaustion on gemini-3.8-flash
+  const modelCandidateList = [
+    'gemini-3.5-flash',
+    'gemini-3.5-flash-lite',
+    options.model || 'gemini-3.8-flash',
+  ];
 
-      if (isHardQuotaExceeded) {
-        throw err;
+  // Remove duplicates while preserving priority order
+  const uniqueModels = Array.from(new Set(modelCandidateList));
+
+  let lastError: any = null;
+
+  for (const modelToTry of uniqueModels) {
+    let attempt = 0;
+    while (attempt <= maxRetries) {
+      try {
+        const ai = getGeminiClient();
+        const callOpts = { ...options, model: modelToTry };
+        return await ai.models.generateContent(callOpts);
+      } catch (err: any) {
+        attempt++;
+        lastError = err;
+
+        const isHardQuotaExceeded =
+          err.message?.includes('RESOURCE_EXHAUSTED') ||
+          err.message?.includes('resource_exhausted') ||
+          err.message?.includes('Quota exceeded') ||
+          err.message?.includes('quota exceeded');
+
+        if (isHardQuotaExceeded) {
+          // Break to next candidate model or fallback
+          break;
+        }
+
+        const isServiceUnavailable =
+          err.status === 503 ||
+          err.message?.includes('503') ||
+          err.message?.includes('high demand') ||
+          err.message?.includes('UNAVAILABLE');
+
+        if (isServiceUnavailable) {
+          console.warn(`[Gemini 503 Model Busy] Model "${modelToTry}" is experiencing high demand. Switching to next model...`);
+          break; // Immediately try the next model candidate
+        }
+
+        const isTransientRateLimit =
+          err.status === 429 ||
+          err.message?.includes('429') ||
+          err.message?.includes('rate-limit');
+
+        if (isTransientRateLimit && attempt <= maxRetries) {
+          const match = err.message?.match(/retry in ([0-9.]+)s/i);
+          const waitSeconds = match ? Math.min(Math.ceil(parseFloat(match[1])), 4) : 1.5;
+          console.warn(`[Gemini 429 Rate Limit on ${modelToTry}] Waiting ${waitSeconds}s before retry ${attempt}/${maxRetries}...`);
+          await new Promise((resolve) => setTimeout(resolve, waitSeconds * 1000));
+          continue;
+        }
+
+        // Other error, break and try next model
+        break;
       }
-
-      const isTransientRateLimit =
-        err.status === 429 ||
-        err.message?.includes('429') ||
-        err.message?.includes('rate-limit');
-
-      if (isTransientRateLimit && attempt <= maxRetries) {
-        const match = err.message?.match(/retry in ([0-9.]+)s/i);
-        const waitSeconds = match ? Math.min(Math.ceil(parseFloat(match[1])), 8) : attempt * 2;
-        console.warn(`[Gemini 429 Rate Limit] Waiting ${waitSeconds}s before retry attempt ${attempt}/${maxRetries}...`);
-        await new Promise((resolve) => setTimeout(resolve, waitSeconds * 1000));
-        continue;
-      }
-      throw err;
     }
   }
+
+  throw lastError || new Error('No se pudo obtener respuesta de ningún modelo de IA.');
 }
 
 
@@ -761,7 +794,7 @@ Compara sus estadísticas clave por partido, historial de partidos directos, for
 
     try {
       const response = await callGeminiWithRetry({
-        model: 'gemini-3.8-flash',
+        model: 'gemini-3.5-flash',
         contents: userPrompt,
         config: {
           systemInstruction,
@@ -859,7 +892,7 @@ Además de las probabilidades numéricas, apuestas de valor con cuotas estimadas
 
     try {
       const response = await callGeminiWithRetry({
-        model: 'gemini-3.8-flash',
+        model: 'gemini-3.5-flash',
         contents: userPrompt,
         config: {
           systemInstruction,
@@ -940,7 +973,7 @@ Incluye cuotas de valor, probabilidades 1X2 y desglose táctico.
     };
 
     const response = await callGeminiWithRetry({
-      model: 'gemini-3.8-flash',
+      model: 'gemini-3.5-flash',
       contents: {
         parts: [imagePart, textPart],
       },

@@ -627,6 +627,310 @@ const TEAMS_DATABASE: KnownTeam[] = [
       { nombre: 'Nicolò Barella', posicion: 'Mediocampista Total', estadoForma: 'Excelente', metricasClave: 'Despliegue y dinamismo', analisisTactico: 'Motor de la medular.', mercadoRelevante: '+60.5 Pases' },
     ],
   },
+  {
+    name: 'Chelsea',
+    aliases: ['chelsea', 'blues', 'chelsea fc', 'cfc'],
+    elo: 1960,
+    tier: 1,
+    attackRating: 8.6,
+    defenseRating: 8.0,
+    possessionTendency: 59,
+    cornersAvg: 6.3,
+    cardsAvg: 2.4,
+    style: 'Ataque vertiginoso por bandas con extremos veloces y mediapunta creativo',
+    league: 'Premier League',
+    players: [
+      { nombre: 'Cole Palmer', posicion: 'Mediapunta / Extremo', estadoForma: 'Excelente', metricasClave: '0.85 xG+xA/90, cobrador infalible de penales', analisisTactico: 'Eje del juego creativo y remates con zurda.', mercadoRelevante: 'Gol o Asistencia / +1.5 Tiros a puerta' },
+    ],
+  },
+  {
+    name: 'Manchester United',
+    aliases: ['manchester united', 'man united', 'man utd', 'red devils', 'mufc'],
+    elo: 1890,
+    tier: 2,
+    attackRating: 8.0,
+    defenseRating: 7.7,
+    possessionTendency: 53,
+    cornersAvg: 6.0,
+    cardsAvg: 2.2,
+    style: 'Transiciones rápidas, juego directo y balones a las espaldas de la zaga rival',
+    league: 'Premier League',
+    players: [
+      { nombre: 'Bruno Fernandes', posicion: 'Capitán / Mediapunta', estadoForma: 'Excelente', metricasClave: '3.1 pases clave/p, tiros de media distancia', analisisTactico: 'Lanzador de juego y generador de peligro.', mercadoRelevante: '+0.5 Asistencias / +2.5 Tiros' },
+    ],
+  },
+  {
+    name: 'Tottenham Hotspur',
+    aliases: ['tottenham', 'spurs', 'tottenham hotspur', 'thfc'],
+    elo: 1910,
+    tier: 2,
+    attackRating: 8.5,
+    defenseRating: 7.6,
+    possessionTendency: 61,
+    cornersAvg: 6.8,
+    cardsAvg: 2.3,
+    style: 'Fútbol ultraofensivo con bloque muy adelantado, asedio constante y partidos de ida y vuelta',
+    league: 'Premier League',
+    players: [
+      { nombre: 'Son Heung-min', posicion: 'Extremo / Delantero', estadoForma: 'Excelente', metricasClave: '0.62 xG/90, golpeo ambidiestro letal', analisisTactico: 'Diagonal al área y definición.', mercadoRelevante: 'Goleador en cualquier momento' },
+    ],
+  },
+  {
+    name: 'Aston Villa',
+    aliases: ['aston villa', 'villa', 'villans', 'avfc'],
+    elo: 1920,
+    tier: 2,
+    attackRating: 8.4,
+    defenseRating: 8.1,
+    possessionTendency: 54,
+    cornersAvg: 5.8,
+    cardsAvg: 2.3,
+    style: 'Trampa del fuera de juego perfecta, verticalidad fulminante con Watkins y orden en Villa Park',
+    league: 'Premier League / Champions League',
+    players: [
+      { nombre: 'Ollie Watkins', posicion: 'Delantero Centro', estadoForma: 'Excelente', metricasClave: '0.68 xG/90, desmarques constantes', analisisTactico: 'Punta veloz y definidor.', mercadoRelevante: 'Goleador en cualquier momento' },
+    ],
+  },
+  {
+    name: 'Newcastle United',
+    aliases: ['newcastle', 'newcastle united', 'magpies', 'nufc'],
+    elo: 1895,
+    tier: 2,
+    attackRating: 8.2,
+    defenseRating: 8.0,
+    possessionTendency: 52,
+    cornersAvg: 5.9,
+    cardsAvg: 2.4,
+    style: 'Intensidad física abrumadora en St James Park, presión alta y contragolpes letales con Isak',
+    league: 'Premier League',
+    players: [
+      { nombre: 'Alexander Isak', posicion: 'Delantero Centro', estadoForma: 'Excelente', metricasClave: 'Eficacia en mano a mano, 0.72 xG/90', analisisTactico: 'Finalizador de alta precisión.', mercadoRelevante: 'Gol en cualquier momento' },
+    ],
+  },
+  {
+    name: 'Everton',
+    aliases: ['everton', 'toffees', 'efc'],
+    elo: 1720,
+    tier: 3,
+    attackRating: 6.8,
+    defenseRating: 7.6,
+    possessionTendency: 42,
+    cornersAvg: 4.8,
+    cardsAvg: 2.5,
+    style: 'Bloque bajo, balones aéreos directos, peligro a balón parado y máxima disputa física',
+    league: 'Premier League',
+    players: [
+      { nombre: 'Dominic Calvert-Lewin', posicion: 'Delantero de Área', estadoForma: 'Bueno', metricasClave: 'Dominio de juego aéreo y pivoteo', analisisTactico: 'Rematador de cabeza.', mercadoRelevante: '+1.5 Faltas recibidas' },
+    ],
+  },
+  {
+    name: 'Paris Saint-Germain',
+    aliases: ['paris saint germain', 'psg', 'paris sg', 'paris'],
+    elo: 2010,
+    tier: 1,
+    attackRating: 9.1,
+    defenseRating: 8.2,
+    possessionTendency: 65,
+    cornersAvg: 6.6,
+    cardsAvg: 1.9,
+    style: 'Posesión dominante con extremos desequilibrantes y control en el Parque de los Príncipes',
+    league: 'Ligue 1 / Champions League',
+    players: [
+      { nombre: 'Ousmane Dembélé', posicion: 'Extremo', estadoForma: 'Excelente', metricasClave: 'Regates 1v1 y centros tensos', analisisTactico: 'Desborde y generación de ocasiones.', mercadoRelevante: '+2.5 Tiros al arco' },
+    ],
+  },
+  {
+    name: 'Bayer Leverkusen',
+    aliases: ['bayer leverkusen', 'leverkusen', 'werkself', 'b04'],
+    elo: 2030,
+    tier: 1,
+    attackRating: 9.1,
+    defenseRating: 8.6,
+    possessionTendency: 63,
+    cornersAvg: 6.9,
+    cardsAvg: 1.8,
+    style: 'Carrileros hiperofensivos (Frimpong/Grimaldo), circulación rápida y pegada agónica en el descuento',
+    league: 'Bundesliga / Champions League',
+    players: [
+      { nombre: 'Florian Wirtz', posicion: 'Mediapunta Creativo', estadoForma: 'Excelente', metricasClave: 'Visión élite y remate', analisisTactico: 'Director de orquesta.', mercadoRelevante: 'Gol o Asistencia' },
+    ],
+  },
+  {
+    name: 'Borussia Dortmund',
+    aliases: ['borussia dortmund', 'dortmund', 'bvb', 'bvb 09'],
+    elo: 1950,
+    tier: 1,
+    attackRating: 8.6,
+    defenseRating: 8.0,
+    possessionTendency: 57,
+    cornersAvg: 6.2,
+    cardsAvg: 2.0,
+    style: 'Verticalidad frenética en el Signal Iduna Park, presión tras pérdida y transiciones punzantes',
+    league: 'Bundesliga / Champions League',
+    players: [
+      { nombre: 'Serhou Guirassy', posicion: 'Delantero Centro', estadoForma: 'Excelente', metricasClave: '0.80 xG/90, rematador de área', analisisTactico: 'Finalización implacable.', mercadoRelevante: 'Goleador en cualquier momento' },
+    ],
+  },
+  {
+    name: 'RB Leipzig',
+    aliases: ['rb leipzig', 'leipzig', 'die roten bullen', 'rbl'],
+    elo: 1930,
+    tier: 2,
+    attackRating: 8.5,
+    defenseRating: 8.1,
+    possessionTendency: 56,
+    cornersAvg: 6.1,
+    cardsAvg: 2.1,
+    style: 'Presión en jauría, transiciones a máxima velocidad de pocos toques y contragolpe quirúrgico',
+    league: 'Bundesliga / Champions League',
+    players: [
+      { nombre: 'Benjamin Šeško', posicion: 'Delantero Tanque', estadoForma: 'Excelente', metricasClave: 'Potencia de zancada y remate violento', analisisTactico: 'Amenaza en carrera abierta.', mercadoRelevante: '+1.5 Tiros a puerta' },
+    ],
+  },
+  {
+    name: 'AC Milan',
+    aliases: ['ac milan', 'milan', 'rossoneri', 'il diavolo'],
+    elo: 1920,
+    tier: 2,
+    attackRating: 8.4,
+    defenseRating: 8.1,
+    possessionTendency: 55,
+    cornersAvg: 5.9,
+    cardsAvg: 2.4,
+    style: 'Velocidad explosiva por banda izquierda con Rafael Leão y juego directo en San Siro',
+    league: 'Serie A / Champions League',
+    players: [
+      { nombre: 'Rafael Leão', posicion: 'Extremo Izquierdo', estadoForma: 'Excelente', metricasClave: '35.4 km/h punta, 4.2 regates/p', analisisTactico: 'Desequilibrio puro en carrera.', mercadoRelevante: 'Tiros a puerta > 1.5' },
+    ],
+  },
+  {
+    name: 'Napoli',
+    aliases: ['napoli', 'nápoles', 'partenopei', 'azzurri napoli'],
+    elo: 1930,
+    tier: 2,
+    attackRating: 8.5,
+    defenseRating: 8.4,
+    possessionTendency: 58,
+    cornersAvg: 6.1,
+    cardsAvg: 2.3,
+    style: 'Intensidad táctica de Conte, solidez en el Diego Armando Maradona y contragolpes afilados',
+    league: 'Serie A',
+    players: [
+      { nombre: 'Khvicha Kvaratskhelia', posicion: 'Extremo', estadoForma: 'Excelente', metricasClave: 'Regate hacia adentro y disparo curvado', analisisTactico: 'Generador de ocasiones y tarjetas.', mercadoRelevante: '+2.5 Tiros totales' },
+    ],
+  },
+  {
+    name: 'Cruz Azul',
+    aliases: ['cruz azul', 'la maquina', 'la máquina', 'cementeros'],
+    elo: 1690,
+    tier: 3,
+    attackRating: 7.7,
+    defenseRating: 7.5,
+    possessionTendency: 59,
+    cornersAvg: 6.1,
+    cardsAvg: 2.3,
+    style: 'Posesión y salida limpia con línea de 3, circulación paciente y presión alta en Ciudad de los Deportes',
+    league: 'Liga MX',
+    players: [
+      { nombre: 'Ángel Sepúlveda', posicion: 'Delantero', estadoForma: 'Excelente', metricasClave: 'Olfato en el área y definición rápida', analisisTactico: 'Rematador oportuno.', mercadoRelevante: 'Gol en cualquier momento' },
+    ],
+  },
+  {
+    name: 'Tigres UANL',
+    aliases: ['tigres', 'tigres uanl', 'los felinos', 'uanl'],
+    elo: 1675,
+    tier: 3,
+    attackRating: 7.6,
+    defenseRating: 7.4,
+    possessionTendency: 57,
+    cornersAvg: 5.9,
+    cardsAvg: 2.5,
+    style: 'Manejo de ritmo y posesión en El Volcán, jerarquía de veteranos y centros precisos',
+    league: 'Liga MX',
+    players: [
+      { nombre: 'André-Pierre Gignac', posicion: 'Delantero Histórico', estadoForma: 'Bueno', metricasClave: 'Jerarquía en momentos cumbre', analisisTactico: 'Disparo de media distancia y penales.', mercadoRelevante: 'Tiros a puerta > 1.5' },
+    ],
+  },
+  {
+    name: 'CF Monterrey',
+    aliases: ['monterrey', 'rayados', 'cf monterrey', 'rayados de monterrey'],
+    elo: 1685,
+    tier: 3,
+    attackRating: 7.7,
+    defenseRating: 7.3,
+    possessionTendency: 56,
+    cornersAvg: 6.0,
+    cardsAvg: 2.3,
+    style: 'Plantilla de alto poderío económico, potencia ofensiva y pegada individual en el Gigante de Acero',
+    league: 'Liga MX',
+    players: [
+      { nombre: 'Sergio Canales', posicion: 'Mediapunta / Organizador', estadoForma: 'Excelente', metricasClave: 'Visión europea y golpeo con zurda', analisisTactico: 'Director de juego y tiro libre.', mercadoRelevante: '+0.5 Asistencias / Tiros > 2.5' },
+    ],
+  },
+  {
+    name: 'Toluca',
+    aliases: ['toluca', 'diablos rojos', 'los diablos'],
+    elo: 1670,
+    tier: 3,
+    attackRating: 7.8,
+    defenseRating: 7.1,
+    possessionTendency: 58,
+    cornersAvg: 6.2,
+    cardsAvg: 2.4,
+    style: 'Ataque frontal arrollador en el Nemesio Diez aprovechando la altitud, duelos abiertos y goles frecuentes',
+    league: 'Liga MX',
+    players: [
+      { nombre: 'Paulinho', posicion: 'Delantero Centro', estadoForma: 'Excelente', metricasClave: 'Líder de goleo en Liga MX', analisisTactico: 'Depredador en área chica.', mercadoRelevante: 'Goleador en cualquier momento' },
+    ],
+  },
+  {
+    name: 'Pumas UNAM',
+    aliases: ['pumas', 'pumas unam', 'universitarios', 'unam'],
+    elo: 1640,
+    tier: 3,
+    attackRating: 7.2,
+    defenseRating: 7.1,
+    possessionTendency: 52,
+    cornersAvg: 5.6,
+    cardsAvg: 2.6,
+    style: 'Desgaste físico en Ciudad Universitaria a mediodía, garra defensiva y balones largos a bandas',
+    league: 'Liga MX',
+    players: [
+      { nombre: 'César Huerta', posicion: 'Extremo Desequilibrante', estadoForma: 'Excelente', metricasClave: 'Regates en 1v1 y centros envenenados', analisisTactico: 'Punto focal del ataque.', mercadoRelevante: '+2.5 Faltas recibidas' },
+    ],
+  },
+  {
+    name: 'Flamengo',
+    aliases: ['flamengo', 'mengao', 'mengaço', 'rubro-negro'],
+    elo: 1810,
+    tier: 2,
+    attackRating: 8.3,
+    defenseRating: 7.8,
+    possessionTendency: 60,
+    cornersAvg: 6.5,
+    cardsAvg: 2.4,
+    style: 'Talento puro en Maracaná, posesión asfixiante y riqueza asociativa en último tercio',
+    league: 'Brasileirão / Copa Libertadores',
+    players: [
+      { nombre: 'Pedro Guilherme', posicion: 'Delantero Centro', estadoForma: 'Excelente', metricasClave: '0.82 xG/90, toque sutil en área', analisisTactico: 'Referencia en área.', mercadoRelevante: 'Goleador en cualquier momento' },
+    ],
+  },
+  {
+    name: 'Palmeiras',
+    aliases: ['palmeiras', 'verdao', 'verdão', 'alviverde'],
+    elo: 1820,
+    tier: 2,
+    attackRating: 8.2,
+    defenseRating: 8.3,
+    possessionTendency: 54,
+    cornersAvg: 6.2,
+    cardsAvg: 2.5,
+    style: 'Orden táctico férreo de Abel Ferreira, transiciones demoledoras y jerarquía copera',
+    league: 'Brasileirão / Copa Libertadores',
+    players: [
+      { nombre: 'Estêvão Willian', posicion: 'Extremo Joya', estadoForma: 'Excelente', metricasClave: 'Desborde y descaro en 1v1', analisisTactico: 'Amenaza de desborde y disparo.', mercadoRelevante: 'Tiros a puerta > 1.5' },
+    ],
+  },
 ];
 
 // Specific Authentic Head-to-Head History Records
@@ -717,14 +1021,37 @@ export function normalizeTeamName(name: string): string {
 // Find team in database or generate realistic asymmetric metrics
 export function resolveTeamData(rawName: string): KnownTeam {
   const norm = normalizeTeamName(rawName);
+  const words = norm.split(/\s+/);
   
-  // Exact or alias match
-  const found = TEAMS_DATABASE.find(t => {
+  // 1. Exact match on official name or aliases
+  const exactMatch = TEAMS_DATABASE.find(t => {
     if (normalizeTeamName(t.name) === norm) return true;
-    return t.aliases.some(a => normalizeTeamName(a) === norm || norm.includes(normalizeTeamName(a)));
+    return t.aliases.some(a => normalizeTeamName(a) === norm);
   });
+  if (exactMatch) return exactMatch;
 
-  if (found) return found;
+  // 2. Multi-word / partial match with longest-match priority (e.g. 'atletico de madrid' wins over 'madrid')
+  let bestMatch: KnownTeam | null = null;
+  let bestMatchLen = 0;
+
+  for (const t of TEAMS_DATABASE) {
+    for (const a of t.aliases) {
+      const normA = normalizeTeamName(a);
+      let isMatch = false;
+      if (normA.includes(' ') && norm.includes(normA)) {
+        isMatch = true;
+      } else if (words.includes(normA) && normA.length >= 4) {
+        isMatch = true;
+      }
+
+      if (isMatch && normA.length > bestMatchLen) {
+        bestMatch = t;
+        bestMatchLen = normA.length;
+      }
+    }
+  }
+
+  if (bestMatch) return bestMatch;
 
   // Asymmetric hash based on name characters
   let hash = 0;
@@ -1130,13 +1457,13 @@ export function generateRealisticMatchFallback(
     riesgo_medio: [
       {
         mercado: 'Línea Estándar de Goles',
-        seleccion: totalGolesEsperados >= 2.4 ? 'Más de 2.0 / 2.5 Goles' : 'Menos de 3.0 Goles',
-        cuota_estimada: '1.78',
+        seleccion: totalGolesEsperados >= 2.4 ? 'Más de 2.0 / 2.5 Goles' : 'Menos de 2.5 Goles',
+        cuota_estimada: totalGolesEsperados >= 2.4 ? (100 / Math.max(30, over25Pct) * 0.92).toFixed(2) : (100 / Math.max(30, 100 - over25Pct) * 0.92).toFixed(2),
         nivel_confianza: 'MEDIA',
         nivel_riesgo: 'MEDIO',
-        probabilidad_estimada: 64,
+        probabilidad_estimada: totalGolesEsperados >= 2.4 ? over25Pct : 100 - over25Pct,
         perfil: 'Equilibrio +EV',
-        justificacion_big_data: 'Excelente balance entre cuota y probabilidad estadística (+EV).',
+        justificacion_big_data: `Frecuencia matemática del ${totalGolesEsperados >= 2.4 ? over25Pct : 100 - over25Pct}% basada en la distribución Poisson de ${totalGolesEsperados} xG.`,
       },
       {
         mercado: 'Ambos Equipos Anotan (BTTS)',
