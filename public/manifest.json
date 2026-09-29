@@ -1,0 +1,21 @@
+{
+  "id": "/",
+  "name": "FutbolData AI - Analizador de Apuestas y Big Data",
+  "short_name": "FutbolData AI",
+  "description": "Analizador predictivo de fútbol con IA, estadísticas avanzadas de Big Data, goles, córners, tarjetas y comparativas Head-to-Head.",
+  "start_url": "/",
+  "scope": "/",
+  "display": "standalone",
+  "theme_color": "#020617",
+  "background_color": "#020617",
+  "orientation": "portrait-primary",
+  "categories": ["sports", "utilities"],
+  "icons": [
+    {
+      "src": "/icon.svg",
+      "sizes": "any",
+      "type": "image/svg+xml",
+      "purpose": "any"
+    }
+  ]
+}

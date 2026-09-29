@@ -1,0 +1,8 @@
+{
+  "name": "Remix FutbolData AI - Analizador de Apuestas y Big Data",
+  "description": "Analizador predictivo de partidos de fútbol con Inteligencia Artificial, estadísticas avanzadas de Big Data, goles, córners, tarjetas y análisis de capturas.",
+  "requestFramePermissions": [],
+  "majorCapabilities": [
+    "MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"
+  ]
+}
