@@ -24,16 +24,35 @@ export const ProbabilityDistributionChart: React.FC<ProbabilityDistributionChart
   probEmpate,
   probVisitante,
   marcadorProbable,
-  over05 = 93,
-  over15 = 79,
-  over25 = 55,
-  over35 = 32,
-  over45 = 14,
-  btts = 58,
+  over05,
+  over15,
+  over25,
+  over35,
+  over45,
+  btts = 50,
   totalGolesEsperados,
 }) => {
   const [chartMode, setChartMode] = useState<'donut' | 'bars' | 'both'>('both');
   const [hoveredSlice, setHoveredSlice] = useState<string | null>(null);
+
+  // Dynamic Poisson computation if not explicitly provided
+  const parsedXG = parseFloat((totalGolesEsperados || '').replace(/[^\d.]/g, '')) || 2.50;
+  const calcPoisson = (lambda: number, k: number) => {
+    let pAccum = 0;
+    let term = Math.exp(-lambda);
+    pAccum += term;
+    for (let i = 1; i <= k; i++) {
+      term = (term * lambda) / i;
+      pAccum += term;
+    }
+    return Math.round(Math.min(99, Math.max(5, (1 - pAccum) * 100)));
+  };
+
+  const effOver05 = over05 ?? calcPoisson(parsedXG, 0);
+  const effOver15 = over15 ?? calcPoisson(parsedXG, 1);
+  const effOver25 = over25 ?? calcPoisson(parsedXG, 2);
+  const effOver35 = over35 ?? calcPoisson(parsedXG, 3);
+  const effOver45 = over45 ?? calcPoisson(parsedXG, 4);
 
   // Normalize 1X2 to sum 100 for SVG geometry
   const totalProb = Math.max(1, probLocal + probEmpate + probVisitante);
@@ -64,13 +83,13 @@ export const ProbabilityDistributionChart: React.FC<ProbabilityDistributionChart
   const lengthV = (pV / 100) * circumference;
 
   // Over / Under goals data
-  const under25 = Math.max(0, 100 - over25);
+  const effUnder25 = Math.max(0, 100 - effOver25);
   const goalBars = [
-    { label: 'Over 0.5 Goles', pct: over05, color: 'from-emerald-500 to-emerald-400', badge: 'Alta Certeza' },
-    { label: 'Over 1.5 Goles', pct: over15, color: 'from-emerald-500 to-teal-400', badge: 'Muy Probable' },
-    { label: 'Over 2.5 Goles', pct: over25, color: 'from-cyan-500 to-blue-400', badge: over25 >= 50 ? 'Línea de Valor' : 'Moderado' },
-    { label: 'Under 2.5 Goles', pct: under25, color: 'from-slate-500 to-slate-400', badge: under25 >= 50 ? 'Línea de Valor' : 'Menor Prob.' },
-    { label: 'Over 3.5 Goles', pct: over35, color: 'from-amber-500 to-amber-400', badge: 'Cuota Alta' },
+    { label: 'Over 0.5 Goles', pct: effOver05, color: 'from-emerald-500 to-emerald-400', badge: 'Alta Certeza' },
+    { label: 'Over 1.5 Goles', pct: effOver15, color: 'from-emerald-500 to-teal-400', badge: 'Muy Probable' },
+    { label: 'Over 2.5 Goles', pct: effOver25, color: 'from-cyan-500 to-blue-400', badge: effOver25 >= 50 ? 'Línea de Valor' : 'Moderado' },
+    { label: 'Under 2.5 Goles', pct: effUnder25, color: 'from-slate-500 to-slate-400', badge: effUnder25 >= 50 ? 'Línea de Valor' : 'Menor Prob.' },
+    { label: 'Over 3.5 Goles', pct: effOver35, color: 'from-amber-500 to-amber-400', badge: 'Cuota Alta' },
     { label: 'Ambos Marcan (BTTS)', pct: btts, color: 'from-purple-500 to-indigo-400', badge: btts >= 50 ? 'Recomendado' : 'Dividido' },
   ];
 
@@ -373,7 +392,7 @@ export const ProbabilityDistributionChart: React.FC<ProbabilityDistributionChart
               </span>
               <span className="text-emerald-400 font-semibold flex items-center gap-1">
                 <CheckCircle2 className="w-3 h-3" />
-                {over25 >= 50 ? 'Tendencia a partido abierto' : 'Tendencia a partido cerrado'}
+                {effOver25 >= 50 ? 'Tendencia a partido abierto' : 'Tendencia a partido cerrado'}
               </span>
             </div>
           </div>

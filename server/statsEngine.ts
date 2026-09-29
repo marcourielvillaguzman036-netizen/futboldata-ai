@@ -464,6 +464,169 @@ const TEAMS_DATABASE: KnownTeam[] = [
       { nombre: 'Miguel Borja', posicion: 'Delantero Centro', estadoForma: 'Excelente', metricasClave: 'Promedio goleador letal', analisisTactico: 'Potencia dentro del área.', mercadoRelevante: 'Goleador en cualquier momento' },
     ],
   },
+  {
+    name: 'Atlético de Madrid',
+    aliases: ['atletico de madrid', 'atlético de madrid', 'atletico', 'atlético', 'colchoneros', 'atleti', 'atm'],
+    elo: 1980,
+    tier: 1,
+    attackRating: 7.7,
+    defenseRating: 9.3,
+    possessionTendency: 48,
+    cornersAvg: 5.4,
+    cardsAvg: 2.8,
+    style: 'Bloque bajo inexpugnable, agresividad en duelos, repliegue disciplinado y contras letales',
+    league: 'LaLiga / Champions League',
+    players: [
+      { nombre: 'Antoine Griezmann', posicion: 'Segundo Delantero', estadoForma: 'Excelente', metricasClave: 'Visión y golpeo quirúrgico', analisisTactico: 'Cerebro organizador y llegada.', mercadoRelevante: 'Gol o Asistencia' },
+      { nombre: 'Julián Álvarez', posicion: 'Delantero', estadoForma: 'Excelente', metricasClave: 'Presión y desmarques', analisisTactico: 'Punta de lanza.', mercadoRelevante: '+1.5 Tiros a puerta' },
+    ],
+  },
+  {
+    name: 'Juventus',
+    aliases: ['juventus', 'juve', 'bianconeri', 'vecchia signora'],
+    elo: 1940,
+    tier: 2,
+    attackRating: 7.3,
+    defenseRating: 9.2,
+    possessionTendency: 51,
+    cornersAvg: 5.1,
+    cardsAvg: 2.5,
+    style: 'Tradición defensiva férrea, pragmatismo táctico, bloque medio-bajo y mínimas concesiones',
+    league: 'Serie A / Champions League',
+    players: [
+      { nombre: 'Dušan Vlahović', posicion: 'Delantero Centro', estadoForma: 'Bueno', metricasClave: '0.62 xG/90, rematador zurdo', analisisTactico: 'Fijación y disparo potente.', mercadoRelevante: 'Gol en cualquier momento' },
+      { nombre: 'Kenan Yıldız', posicion: 'Mediapunta / Extremo', estadoForma: 'Excelente', metricasClave: 'Desborde y remate desde la frontal', analisisTactico: 'Desequilibrio creativo.', mercadoRelevante: 'Tiros a puerta > 1.0' },
+    ],
+  },
+  {
+    name: 'Bayern Múnich',
+    aliases: ['bayern munich', 'bayern münchen', 'bayern', 'bávaros', 'fc bayern'],
+    elo: 2090,
+    tier: 1,
+    attackRating: 9.6,
+    defenseRating: 8.5,
+    possessionTendency: 66,
+    cornersAvg: 7.4,
+    cardsAvg: 1.6,
+    style: 'Ofensiva arrolladora, asedio por las bandas, remates constantes al área y presión asfixiante',
+    league: 'Bundesliga / Champions League',
+    players: [
+      { nombre: 'Harry Kane', posicion: 'Delantero Centro', estadoForma: 'Excelente', metricasClave: '1.05 xG/90, letal en penales y remates', analisisTactico: 'Finalizador de clase mundial.', mercadoRelevante: 'Goleador en cualquier momento' },
+      { nombre: 'Jamal Musiala', posicion: 'Mediapunta / Extremo', estadoForma: 'Excelente', metricasClave: 'Regate en espacio reducido', analisisTactico: 'Infiltración entre líneas.', mercadoRelevante: 'Tiros a puerta > 1.5' },
+    ],
+  },
+  {
+    name: 'Liverpool',
+    aliases: ['liverpool', 'reds', 'lfc', 'anfield'],
+    elo: 2085,
+    tier: 1,
+    attackRating: 9.4,
+    defenseRating: 8.6,
+    possessionTendency: 63,
+    cornersAvg: 7.1,
+    cardsAvg: 1.7,
+    style: 'Ritmo vertiginoso en Anfield, recuperación fulminante en campo contrario y extremos punzantes',
+    league: 'Premier League / Champions League',
+    players: [
+      { nombre: 'Mohamed Salah', posicion: 'Extremo Derecho', estadoForma: 'Excelente', metricasClave: '0.85 xG+xA/90, diagonal clásica', analisisTactico: 'Máxima amenaza goleadora.', mercadoRelevante: 'Anotará o asistirá' },
+    ],
+  },
+  {
+    name: 'Inter de Milán',
+    aliases: ['inter de milan', 'inter milan', 'inter', 'nerazzurri'],
+    elo: 2010,
+    tier: 1,
+    attackRating: 8.8,
+    defenseRating: 9.1,
+    possessionTendency: 57,
+    cornersAvg: 6.3,
+    cardsAvg: 2.1,
+    style: 'Sistema 3-5-2 maestro, carrileros profundos, salida límpida y dupla atacante sincronizada',
+    league: 'Serie A / Champions League',
+    players: [
+      { nombre: 'Lautaro Martínez', posicion: 'Delantero Centro', estadoForma: 'Excelente', metricasClave: 'Capitán y definición rápida', analisisTactico: 'Olfato y garra.', mercadoRelevante: 'Goleador en cualquier momento' },
+    ],
+  },
+  {
+    name: 'Arsenal',
+    aliases: ['arsenal', 'gunners', 'afc'],
+    elo: 2050,
+    tier: 1,
+    attackRating: 9.1,
+    defenseRating: 9.2,
+    possessionTendency: 64,
+    cornersAvg: 7.0,
+    cardsAvg: 1.8,
+    style: 'Organización táctica milimétrica, maestría letal a balón parado y control territorial',
+    league: 'Premier League / Champions League',
+    players: [
+      { nombre: 'Bukayo Saka', posicion: 'Extremo Derecho', estadoForma: 'Excelente', metricasClave: '1v1 y centros envenenados', analisisTactico: 'Generador continuo de córners y faltas.', mercadoRelevante: 'Asistencias > 0.5' },
+    ],
+  },
+  {
+    name: 'Bolivia',
+    aliases: ['bolivia', 'la verde', 'seleccion boliviana'],
+    elo: 1470,
+    tier: 4,
+    attackRating: 5.2,
+    defenseRating: 5.1,
+    possessionTendency: 40,
+    cornersAvg: 3.5,
+    cardsAvg: 2.8,
+    style: 'Defensa con bloque bajo, juego aéreo y repliegue forzado ante potencias',
+    league: 'CONMEBOL',
+    players: [
+      { nombre: 'Referente de Bolivia', posicion: 'Delantero', estadoForma: 'Regular', metricasClave: 'Ocasiones esporádicas en contragolpe', analisisTactico: 'Salidas aisladas.', mercadoRelevante: '+0.5 Tiros a puerta' },
+    ],
+  },
+  {
+    name: 'Alemania',
+    aliases: ['alemania', 'germany', 'die mannschaft', 'ger'],
+    elo: 2010,
+    tier: 1,
+    attackRating: 9.0,
+    defenseRating: 8.3,
+    possessionTendency: 64,
+    cornersAvg: 6.8,
+    cardsAvg: 1.6,
+    style: 'Juego asociativo vertiginoso, presión asfixiante y llegadas masivas al área',
+    league: 'UEFA',
+    players: [
+      { nombre: 'Florian Wirtz', posicion: 'Mediapunta', estadoForma: 'Excelente', metricasClave: 'Magia entre líneas y pases filtrados', analisisTactico: 'Desequilibrio creativo.', mercadoRelevante: '+1.5 Tiros / Asistencia' },
+    ],
+  },
+  {
+    name: 'Inglaterra',
+    aliases: ['inglaterra', 'england', 'three lions', 'eng'],
+    elo: 2060,
+    tier: 1,
+    attackRating: 9.1,
+    defenseRating: 8.7,
+    possessionTendency: 62,
+    cornersAvg: 6.5,
+    cardsAvg: 1.5,
+    style: 'Plantel plagado de talento individual, equilibrio en mediocampo y pegada ofensiva',
+    league: 'UEFA',
+    players: [
+      { nombre: 'Jude Bellingham', posicion: 'Volante Llegador', estadoForma: 'Excelente', metricasClave: 'Llegada desde segunda línea y presencia', analisisTactico: 'Líder en momentos clave.', mercadoRelevante: 'Goleador en cualquier momento' },
+    ],
+  },
+  {
+    name: 'Italia',
+    aliases: ['italia', 'italy', 'azzurra', 'ita'],
+    elo: 1940,
+    tier: 2,
+    attackRating: 7.9,
+    defenseRating: 8.6,
+    possessionTendency: 56,
+    cornersAvg: 5.8,
+    cardsAvg: 2.2,
+    style: 'Cultura táctica estricta, repliegue solidario y transiciones rápidas',
+    league: 'UEFA',
+    players: [
+      { nombre: 'Nicolò Barella', posicion: 'Mediocampista Total', estadoForma: 'Excelente', metricasClave: 'Despliegue y dinamismo', analisisTactico: 'Motor de la medular.', mercadoRelevante: '+60.5 Pases' },
+    ],
+  },
 ];
 
 // Specific Authentic Head-to-Head History Records
@@ -813,13 +976,20 @@ export function generateRealisticMatchFallback(
   const probLocal = Math.round(expectedLocalWinShare * (100 - probEmpate));
   const probVisitante = 100 - probLocal - probEmpate;
 
-  // Poisson Lambda (Expected Goals)
-  const baseGoalAvg = 1.35;
+  // Poisson Lambda (Expected Goals - Dynamic xG model)
+  // League/World baseline ~1.30 per team, scaled realistically by offensive power and defensive solidity
+  const localAttVsAwayDef = (localTeam.attackRating / 7.5) * (7.5 / Math.max(4.5, awayTeam.defenseRating));
+  const awayAttVsLocalDef = (awayTeam.attackRating / 7.5) * (7.5 / Math.max(4.5, localTeam.defenseRating));
+
+  // Elo adjustment factor (logarithmic to prevent extreme runaway while preserving clear hierarchy)
+  const eloAdjustmentLocal = 1 + (deltaElo / 700);
+  const eloAdjustmentAway = 1 - (deltaElo / 700);
+
   const lambdaLocal = +(
-    Math.max(0.65, Math.min(3.8, baseGoalAvg * (1 + deltaElo / 550) * (localTeam.attackRating / awayTeam.defenseRating)))
+    Math.max(0.45, Math.min(3.40, 1.35 * localAttVsAwayDef * eloAdjustmentLocal))
   ).toFixed(2);
   const lambdaAway = +(
-    Math.max(0.40, Math.min(3.2, (baseGoalAvg - 0.20) * (1 - deltaElo / 550) * (awayTeam.attackRating / localTeam.defenseRating)))
+    Math.max(0.35, Math.min(2.80, 1.15 * awayAttVsLocalDef * eloAdjustmentAway))
   ).toFixed(2);
   const totalGolesEsperados = +(lambdaLocal + lambdaAway).toFixed(2);
 
