@@ -860,6 +860,13 @@ Cuando el partido involucre equipos femeninos (ej: Tigres Femenil, Barcelona Fem
 Proporciona estimaciones realistas basadas en el rendimiento reciente de ambos equipos, métricas avanzadas (xG esperados, posesión, estilo de transiciones, intensidad de faltas y estadísticas de córners).
 Integra las noticias de última hora, bajas, lesionadas y reportes confirmados de internet para ambos conjuntos.
 Sé preciso, profesional y fundamentado en números lógicos. Los porcentajes de probabilidad 1X2 deben sumar exactamente 100%.
+
+REGLA CRUCIAL DE MARCADOR PROBABLE:
+- NO asignes siempre "1 - 1" por defecto. El marcador más probable debe reflejar la jerarquía real y congruente del partido:
+  * Si un equipo es favorito claro (>55% probabilidad de ganar), el marcador DEBE reflejar su victoria (ej: "2 - 0", "2 - 1", "3 - 0", "3 - 1").
+  * Si es un favorito moderado (40-54%), sugiere "2 - 1", "1 - 0" o "2 - 0".
+  * Solo si las probabilidades 1X2 están extremadamente parejas (ej: 34% - 33% - 33%) y la probabilidad de empate es la más alta, es válido "1 - 1" o "0 - 0".
+  * En partidos de alto poder ofensivo con xG > 2.8, los marcadores deben ser abiertos (ej: "2 - 1", "3 - 1", "2 - 2").
 `;
 
     const userPrompt = `
@@ -911,6 +918,20 @@ Además de las probabilidades numéricas, apuestas de valor con cuotas estimadas
 
       const data = JSON.parse(text);
       data.inteligencia_web = data.inteligencia_web || webReport;
+
+      // Ensure marcador_probable is consistent with 1X2 win probabilities and not stuck at 1 - 1
+      if (data.marcador_probable === '1 - 1' || data.marcador_probable === '0 - 0') {
+        const pL = data.probabilidad_local || 33;
+        const pV = data.probabilidad_visitante || 33;
+        const xg = parseFloat(String(data.goles_esperados_total || '').replace(/[^\d.]/g, '')) || 2.5;
+
+        if (pL >= pV + 15) {
+          data.marcador_probable = xg > 2.8 ? '3 - 1' : xg < 2.0 ? '1 - 0' : '2 - 1';
+        } else if (pV >= pL + 15) {
+          data.marcador_probable = xg > 2.8 ? '1 - 3' : xg < 2.0 ? '0 - 1' : '1 - 2';
+        }
+      }
+
       matchCache.set(cacheKey, { data, timestamp: Date.now() });
       return res.json(data);
     } catch (aiError: any) {

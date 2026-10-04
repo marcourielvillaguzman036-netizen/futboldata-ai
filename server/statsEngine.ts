@@ -1524,7 +1524,21 @@ export function generateRealisticMatchFallback(
 
   // Sort scoreline probabilities
   scoreMatrix.sort((a, b) => b.prob - a.prob);
-  const mostLikelyScore = scoreMatrix[0]?.score || '1 - 1';
+
+  // If local is favored, find the highest probability home win score (e.g. 2-1, 2-0, 3-1, 1-0)
+  // If away is favored, find the highest probability away win score (e.g. 1-2, 0-2, 1-3, 0-1)
+  // Only if truly balanced with high draw probability, pick draw score
+  let mostLikelyScore = '1 - 1';
+  if (probLocal >= probVisitante + 10) {
+    const topHomeWin = scoreMatrix.find(s => s.homeG > s.awayG);
+    mostLikelyScore = topHomeWin ? topHomeWin.score : (scoreMatrix[0]?.score || '2 - 1');
+  } else if (probVisitante >= probLocal + 10) {
+    const topAwayWin = scoreMatrix.find(s => s.awayG > s.homeG);
+    mostLikelyScore = topAwayWin ? topAwayWin.score : (scoreMatrix[0]?.score || '1 - 2');
+  } else {
+    // Highly competitive / balanced
+    mostLikelyScore = scoreMatrix[0]?.score || '1 - 1';
+  }
 
   // Over / Under probabilities from Poisson
   let probOver05 = 0, probOver15 = 0, probOver25 = 0, probOver35 = 0, probOver45 = 0;
