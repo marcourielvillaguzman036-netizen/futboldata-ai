@@ -271,7 +271,7 @@ export default function App() {
                       analizar();
                     }
                   }}
-                  placeholder="Escribe el partido (Ej: Real Madrid vs Manchester City, Boca vs River...)"
+                  placeholder="Escribe el partido (Ej: Real Madrid vs Man City, Tigres Femenil vs América Femenil, Barça Femenil vs Chelsea...)"
                   className="w-full pl-12 pr-4 py-3.5 rounded-2xl bg-slate-950 border border-slate-700/80 text-base text-slate-100 placeholder-slate-500 focus:outline-none focus:border-emerald-500 focus:ring-2 focus:ring-emerald-500/20 transition-all shadow-inner"
                 />
               </div>

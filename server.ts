@@ -855,13 +855,15 @@ app.post('/api/analyze-match', async (req, res) => {
 
     const systemInstruction = `
 Actúa como un experto analista cuantitativo de apuestas de fútbol y Big Data para el año 2026 con capacidad de rastreo en internet en tiempo real.
+Cubre tanto fútbol masculino como fútbol femenino (Liga MX Femenil, Liga F, Barclays Women's Super League WSL, NWSL, Première Ligue, UEFA Women's Champions League y torneos de selecciones femeninas).
+Cuando el partido involucre equipos femeninos (ej: Tigres Femenil, Barcelona Femenil, América Femenil, Selección Femenina), asegúrate de que el análisis, alineaciones y jugadoras correspondan exclusivamente a la división femenina respectiva.
 Proporciona estimaciones realistas basadas en el rendimiento reciente de ambos equipos, métricas avanzadas (xG esperados, posesión, estilo de transiciones, intensidad de faltas y estadísticas de córners).
-Integra las noticias de última hora, bajas, lesionados y reportes confirmados de internet para ambos conjuntos.
+Integra las noticias de última hora, bajas, lesionadas y reportes confirmados de internet para ambos conjuntos.
 Sé preciso, profesional y fundamentado en números lógicos. Los porcentajes de probabilidad 1X2 deben sumar exactamente 100%.
 `;
 
     const userPrompt = `
-Analiza el siguiente partido de fútbol con Big Data deportiva para el año 2026: "${partido.trim()}".
+Analiza el siguiente partido de fútbol (masculino o femenino) con Big Data deportiva para el año 2026: "${partido.trim()}".
 ${contextoAdicional ? `Contexto o datos adicionales provistos por el usuario: "${contextoAdicional}".` : ''}
 
 ${webSummary}
@@ -1086,6 +1088,24 @@ app.get('/api/quick-matches', (_req, res) => {
       liga: 'MLS',
       badge: 'MLS',
       contexto: 'Encuentro dinámico con alta tendencia de ambos equipos anotando.',
+    },
+    {
+      partido: 'Barcelona Femenil vs Chelsea Women',
+      liga: 'UEFA Women\'s Champions League',
+      badge: 'Femenil Top',
+      contexto: 'Duelo cumbre europeo femenino con alta intensidad ofensiva, Aitana Bonmatí y Sam Kerr.',
+    },
+    {
+      partido: 'Tigres Femenil vs América Femenil',
+      liga: 'Liga MX Femenil',
+      badge: 'Liga MX Femenil',
+      contexto: 'Clásico de máxima rivalidad en el fútbol femenino mexicano con alto promedio de goles.',
+    },
+    {
+      partido: 'España Femenil vs Estados Unidos Femenil',
+      liga: 'Fútbol Internacional Femenino',
+      badge: 'Selección Fem',
+      contexto: 'Enfrentamiento entre campeonas del mundo y las cuatro veces campeonas olímpicas.',
     },
   ]);
 });

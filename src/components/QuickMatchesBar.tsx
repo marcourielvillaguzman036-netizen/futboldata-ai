@@ -19,6 +19,7 @@ export const QuickMatchesBar: React.FC<QuickMatchesBarProps> = ({
 
   const leagueCategories = [
     { id: 'all', label: '🌍 Todas las Ligas' },
+    { id: 'femenil', label: '⚽ Femenil Top' },
     { id: 'champions', label: '🏆 Champions' },
     { id: 'premier', label: '🏴󠁧󠁢󠁥󠁮󠁧󠁿 Premier' },
     { id: 'laliga', label: '🇪🇸 LaLiga' },
@@ -30,6 +31,7 @@ export const QuickMatchesBar: React.FC<QuickMatchesBarProps> = ({
   const filteredMatches = matches.filter((m) => {
     if (selectedLeagueFilter === 'all') return true;
     const text = (m.liga + ' ' + m.badge + ' ' + m.partido).toLowerCase();
+    if (selectedLeagueFilter === 'femenil') return text.includes('femenil') || text.includes('women') || text.includes('femenino');
     if (selectedLeagueFilter === 'champions') return text.includes('champions') || text.includes('europa');
     if (selectedLeagueFilter === 'premier') return text.includes('premier') || text.includes('liverpool') || text.includes('arsenal') || text.includes('city') || text.includes('chelsea');
     if (selectedLeagueFilter === 'laliga') return text.includes('laliga') || text.includes('madrid') || text.includes('barcelona');
