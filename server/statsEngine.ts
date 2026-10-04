@@ -1557,6 +1557,31 @@ export function generateRealisticMatchFallback(
   const bttsPct = Math.round(probBTTS * 100);
   const over25Pct = Math.round(probOver25 * 100);
 
+  // First Goal Probability Model (Continuous Poisson Hazard Process)
+  // Prob(0-0) = e^(-(lambdaL + lambdaA))
+  const probNoGoals = Math.round(Math.exp(-totalGolesEsperados) * 100);
+  const probAnyGoal = 100 - probNoGoals;
+  const localHazardShare = lambdaLocal / (lambdaLocal + lambdaAway);
+  const probPrimerGolLocal = Math.round(localHazardShare * probAnyGoal);
+  const probPrimerGolAway = probAnyGoal - probPrimerGolLocal;
+
+  const equipoFavoritoPrimerGol = probPrimerGolLocal >= probPrimerGolAway ? equipoLocal : equipoVisitante;
+  const jugadorPrimerGol = probPrimerGolLocal >= probPrimerGolAway 
+    ? (localTeam.players[0]?.nombre || `Referente Ofensivo de ${equipoLocal}`)
+    : (awayTeam.players[0]?.nombre || `Referente Ofensivo de ${equipoVisitante}`);
+
+  const cuotaPrimerGol = (100 / Math.max(probPrimerGolLocal, probPrimerGolAway) * 0.93).toFixed(2);
+  const primerGolPrediction = {
+    equipo_favorito_primer_gol: equipoFavoritoPrimerGol,
+    probabilidad_primer_gol_local: probPrimerGolLocal,
+    probabilidad_primer_gol_visitante: probPrimerGolAway,
+    probabilidad_sin_goles: probNoGoals,
+    jugador_mas_probable: jugadorPrimerGol,
+    minuto_estimado_rango: totalGolesEsperados >= 2.8 ? 'Minuto 1 - 25' : 'Minuto 20 - 38',
+    cuota_estimada_primer_gol: cuotaPrimerGol,
+    analisis_probabilidad: `${equipoFavoritoPrimerGol} registra un ritmo inicial más punzante con un xG temprano superior (${probPrimerGolLocal >= probPrimerGolAway ? lambdaLocal : lambdaAway} xG proyectado), convirtiéndolo en la opción de mayor valor matemático para inaugurar el marcador.`,
+  };
+
   // Corners & Cards based on teams' authentic tactical metrics
   const cornersTotal = Math.round(localTeam.cornersAvg + awayTeam.cornersAvg);
   const cornersDominante = localTeam.cornersAvg >= awayTeam.cornersAvg ? equipoLocal : equipoVisitante;
@@ -1806,6 +1831,7 @@ export function generateRealisticMatchFallback(
     probabilidad_empate: probEmpate,
     probabilidad_visitante: probVisitante,
     marcador_probable: mostLikelyScore,
+    primer_gol: primerGolPrediction,
     goles_over_under_linea: totalGolesEsperados >= 2.5 ? 'Over 2.5 Goles' : 'Over 1.5 / 2.0 Goles',
     goles_esperados_total: `${totalGolesEsperados} goles`,
     corners_rango_estimado: `${Math.max(7, cornersTotal - 2)} - ${cornersTotal + 2} córners`,

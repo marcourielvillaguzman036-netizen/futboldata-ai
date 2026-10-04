@@ -106,6 +106,17 @@ export interface ExpectedValueEdge {
   explicacion_matematica: string;
 }
 
+export interface PrimerGolPrediction {
+  equipo_favorito_primer_gol: string;
+  probabilidad_primer_gol_local: number; // 0 - 100
+  probabilidad_primer_gol_visitante: number; // 0 - 100
+  probabilidad_sin_goles: number; // 0 - 100
+  jugador_mas_probable: string;
+  minuto_estimado_rango: string; // ej: "Min 15 - 30"
+  cuota_estimada_primer_gol: string; // ej: "1.72"
+  analisis_probabilidad: string;
+}
+
 export interface MatchAnalysis {
   partido_formateado: string;
   equipo_local: string;
@@ -125,6 +136,9 @@ export interface MatchAnalysis {
   probabilidad_empate: number;
   probabilidad_visitante: number;
   marcador_probable: string;
+
+  // Primer gol prediction
+  primer_gol?: PrimerGolPrediction;
 
   goles_over_under_linea?: string;
   goles_esperados_total?: string;

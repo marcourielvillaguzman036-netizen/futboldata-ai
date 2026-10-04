@@ -129,6 +129,30 @@ const analysisSchema = {
     probabilidad_visitante: { type: Type.INTEGER, description: 'Porcentaje 0-100' },
     marcador_probable: { type: Type.STRING, description: 'Marcador más probable, ej: 2 - 1' },
 
+    primer_gol: {
+      type: Type.OBJECT,
+      properties: {
+        equipo_favorito_primer_gol: { type: Type.STRING, description: 'Nombre del equipo con mayor probabilidad de anotar el 1er gol del partido' },
+        probabilidad_primer_gol_local: { type: Type.INTEGER, description: 'Probabilidad de que el local anote primero (0-100)' },
+        probabilidad_primer_gol_visitante: { type: Type.INTEGER, description: 'Probabilidad de que el visitante anote primero (0-100)' },
+        probabilidad_sin_goles: { type: Type.INTEGER, description: 'Probabilidad de 0-0 sin goles (0-100)' },
+        jugador_mas_probable: { type: Type.STRING, description: 'Jugador con mayor probabilidad de marcar el primer gol' },
+        minuto_estimado_rango: { type: Type.STRING, description: 'Franja de minutos probable, ej: Min 15 - 30 o Min 1 - 25' },
+        cuota_estimada_primer_gol: { type: Type.STRING, description: 'Cuota estimada de apuesta, ej: 1.68' },
+        analisis_probabilidad: { type: Type.STRING, description: 'Justificación basada en xG inicial, presión y rachas de anotación temprana' },
+      },
+      required: [
+        'equipo_favorito_primer_gol',
+        'probabilidad_primer_gol_local',
+        'probabilidad_primer_gol_visitante',
+        'probabilidad_sin_goles',
+        'jugador_mas_probable',
+        'minuto_estimado_rango',
+        'cuota_estimada_primer_gol',
+        'analisis_probabilidad',
+      ],
+    },
+
     goles_over_under_linea: { type: Type.STRING, description: 'Línea sugerida, ej: Over 2.5 goles' },
     goles_esperados_total: { type: Type.STRING, description: 'Promedio goles esperados, ej: 2.75 goles' },
 
@@ -880,6 +904,7 @@ Asegúrate de llenar todos los campos solicitados del esquema, especialmente:
 - tarjetas: Tendencia de amonestaciones según el estilo de juego.
 - tiros: Estimación de tiros directos al arco.
 - ambos_anotan: Probabilidad de que ambos marquen.
+- primer_gol: Predicción cuantitativa exacta de quién tiene más probabilidad de meter el PRIMER GOL del partido (probabilidad % para el local, visitante y 0-0 sin goles, nombre del jugador más probable en abrir el marcador, franja de minutos estimada ej: Min 15-30, cuota estimada y análisis táctico del arranque).
 - historial_local y historial_visitante: Los últimos 5 partidos jugados de cada equipo con rival, marcador exacto, resultado (V, E o D), condición local/visita, goles a favor/contra, y córners/tarjetas.
 - jugadores_analisis_local y jugadores_analisis_visitante: Desglose individual de 3 a 5 jugadores clave por equipo con su nombre, posición, estado de forma (Excelente, Bueno, Regular o Baja / En duda), métricas clave (goles, tiros a puerta, pases clave), análisis táctico de su impacto y mercado individual de apuestas relevante.
 - simulacion_monte_carlo: 10,000 simulaciones estocásticas con distribución Poisson bivariada para marcadores probables y curva de goles Over/Under.
@@ -929,6 +954,32 @@ Además de las probabilidades numéricas, apuestas de valor con cuotas estimadas
         } else if (pV >= pL + 15) {
           data.marcador_probable = xg > 2.8 ? '1 - 3' : xg < 2.0 ? '0 - 1' : '1 - 2';
         }
+      }
+
+      // Guarantee primer_gol is populated with quantitative metrics
+      if (!data.primer_gol || !data.primer_gol.equipo_favorito_primer_gol) {
+        const pL = data.probabilidad_local || 45;
+        const pV = data.probabilidad_visitante || 30;
+        const probNoG = Math.max(4, Math.min(18, Math.round((data.probabilidad_empate || 25) * 0.45)));
+        const remaining = 100 - probNoG;
+        const pFirstL = Math.round((pL / (pL + pV)) * remaining);
+        const pFirstV = remaining - pFirstL;
+        const isLocFav = pFirstL >= pFirstV;
+        const fav = isLocFav ? data.equipo_local : data.equipo_visitante;
+        const bestPlayer = data.jugadores_clave?.[0]?.jugador ||
+          (isLocFav ? data.jugadores_analisis_local?.[0]?.nombre : data.jugadores_analisis_visitante?.[0]?.nombre) ||
+          `Delantero Referente de ${fav}`;
+
+        data.primer_gol = {
+          equipo_favorito_primer_gol: fav,
+          probabilidad_primer_gol_local: pFirstL,
+          probabilidad_primer_gol_visitante: pFirstV,
+          probabilidad_sin_goles: probNoG,
+          jugador_mas_probable: bestPlayer,
+          minuto_estimado_rango: 'Minuto 15 - 32',
+          cuota_estimada_primer_gol: (100 / Math.max(pFirstL, pFirstV) * 0.93).toFixed(2),
+          analisis_probabilidad: `${fav} registra mayor xG temprano e iniciativa ofensiva en el arranque, proyectando un ${Math.max(pFirstL, pFirstV)}% de probabilidad de abrir el marcador.`
+        };
       }
 
       matchCache.set(cacheKey, { data, timestamp: Date.now() });
