@@ -1334,9 +1334,9 @@ export function generateRealisticH2HFallback(teamAInput: string, teamBInput: str
   const probA = Math.round(expectedProbA * (100 - probDraw));
   const probB = 100 - probA - probDraw;
 
-  // Expected goals
-  const lambdaA = +(1.35 * Math.pow(10, deltaElo / 800) * (teamAData.attackRating / teamBData.defenseRating)).toFixed(2);
-  const lambdaB = +(1.25 * Math.pow(10, -deltaElo / 800) * (teamBData.attackRating / teamAData.defenseRating)).toFixed(2);
+  // Expected goals (Symmetric baseline 1.30 on neutral/general grounds)
+  const lambdaA = +(1.30 * Math.pow(10, deltaElo / 800) * (teamAData.attackRating / teamBData.defenseRating)).toFixed(2);
+  const lambdaB = +(1.30 * Math.pow(10, -deltaElo / 800) * (teamBData.attackRating / teamAData.defenseRating)).toFixed(2);
   const avgGoals = +(lambdaA + lambdaB).toFixed(2);
   const over25Pct = Math.round(Math.min(85, Math.max(30, 38 + (avgGoals - 2.2) * 28)));
   const bttsPct = Math.round(Math.min(82, Math.max(35, (1 - Math.exp(-lambdaA)) * (1 - Math.exp(-lambdaB)) * 100 + 12)));
