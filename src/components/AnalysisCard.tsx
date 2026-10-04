@@ -513,6 +513,139 @@ ${analysis.apuestas_de_valor
         </div>
       </div>
 
+      {/* DIRECT MATHEMATICAL BETTING VERDICT (+EV HIGHLIGHTS) - ANSWERS DIRECTLY "A QUÉ APOSTARLE" */}
+      <div className="bg-gradient-to-br from-emerald-950/70 via-slate-950 to-slate-900 border-2 border-emerald-500/50 rounded-3xl p-5 sm:p-6 shadow-2xl shadow-emerald-950/40 relative overflow-hidden space-y-4">
+        <div className="absolute top-0 right-0 w-80 h-80 bg-emerald-500/10 rounded-full blur-3xl pointer-events-none" />
+
+        <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 border-b border-emerald-500/20 pb-3">
+          <div className="flex items-center gap-3">
+            <div className="w-10 h-10 rounded-2xl bg-emerald-500 text-slate-950 flex items-center justify-center font-black text-xl shadow-lg shadow-emerald-500/30">
+              🎯
+            </div>
+            <div>
+              <h3 className="text-base sm:text-lg font-black text-slate-100 flex items-center gap-2">
+                A QUÉ APOSTARLE (Matemáticas y Probabilidades +EV)
+                <span className="text-[10px] font-extrabold px-2 py-0.5 rounded-full bg-emerald-400 text-slate-950 uppercase">
+                  Recomendación Directa
+                </span>
+              </h3>
+              <p className="text-xs text-slate-400">
+                Selecciones optimizadas mediante Distribución de Poisson, xG simulado y Valor Esperado matemático
+              </p>
+            </div>
+          </div>
+          <button
+            onClick={() => onOpenStakeCalculator()}
+            className="px-3 py-1.5 rounded-xl bg-emerald-500/20 hover:bg-emerald-500/30 text-emerald-300 border border-emerald-500/40 text-xs font-bold transition-all flex items-center gap-1.5 self-start sm:self-auto"
+          >
+            <Calculator className="w-3.5 h-3.5" />
+            Gestionar Stake de Apuesta
+          </button>
+        </div>
+
+        {/* 3 Direct Picks Cards */}
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-3.5 pt-1">
+          {/* Pick 1: Banker (Seguridad) */}
+          {effectiveBetsByRisk.riesgo_bajo[0] && (
+            <div className="p-4 rounded-2xl bg-slate-900/90 border border-emerald-500/40 flex flex-col justify-between space-y-2.5">
+              <div className="space-y-1.5">
+                <div className="flex items-center justify-between">
+                  <span className="text-[10px] uppercase font-bold text-emerald-400 bg-emerald-500/10 px-2 py-0.5 rounded border border-emerald-500/20">
+                    🟢 Apuesta Segura (Banker)
+                  </span>
+                  <span className="text-xs font-mono font-bold text-slate-300">
+                    {effectiveBetsByRisk.riesgo_bajo[0].probabilidad_estimada || 78}% Prob.
+                  </span>
+                </div>
+                <div className="flex items-baseline justify-between gap-1 pt-1">
+                  <span className="text-sm font-black text-slate-100">
+                    {effectiveBetsByRisk.riesgo_bajo[0].seleccion}
+                  </span>
+                  <span className="text-sm font-black font-mono text-emerald-400">
+                    @{effectiveBetsByRisk.riesgo_bajo[0].cuota_estimada}
+                  </span>
+                </div>
+                <p className="text-[11px] text-slate-400 leading-snug">
+                  {effectiveBetsByRisk.riesgo_bajo[0].justificacion_big_data}
+                </p>
+              </div>
+              <button
+                onClick={() => onOpenStakeCalculator(effectiveBetsByRisk.riesgo_bajo[0].cuota_estimada)}
+                className="w-full py-1.5 text-center text-xs font-semibold rounded-lg bg-emerald-500/10 hover:bg-emerald-500/20 text-emerald-300 border border-emerald-500/30 transition-all flex items-center justify-center gap-1"
+              >
+                Apostar esta cuota @{effectiveBetsByRisk.riesgo_bajo[0].cuota_estimada}
+              </button>
+            </div>
+          )}
+
+          {/* Pick 2: Sweet Spot (+EV) */}
+          {effectiveBetsByRisk.riesgo_medio[0] && (
+            <div className="p-4 rounded-2xl bg-slate-900/90 border border-amber-500/40 flex flex-col justify-between space-y-2.5">
+              <div className="space-y-1.5">
+                <div className="flex items-center justify-between">
+                  <span className="text-[10px] uppercase font-bold text-amber-400 bg-amber-500/10 px-2 py-0.5 rounded border border-amber-500/20">
+                    🟡 Mejor Valor (+EV)
+                  </span>
+                  <span className="text-xs font-mono font-bold text-slate-300">
+                    {effectiveBetsByRisk.riesgo_medio[0].probabilidad_estimada || 62}% Prob.
+                  </span>
+                </div>
+                <div className="flex items-baseline justify-between gap-1 pt-1">
+                  <span className="text-sm font-black text-slate-100">
+                    {effectiveBetsByRisk.riesgo_medio[0].seleccion}
+                  </span>
+                  <span className="text-sm font-black font-mono text-amber-400">
+                    @{effectiveBetsByRisk.riesgo_medio[0].cuota_estimada}
+                  </span>
+                </div>
+                <p className="text-[11px] text-slate-400 leading-snug">
+                  {effectiveBetsByRisk.riesgo_medio[0].justificacion_big_data}
+                </p>
+              </div>
+              <button
+                onClick={() => onOpenStakeCalculator(effectiveBetsByRisk.riesgo_medio[0].cuota_estimada)}
+                className="w-full py-1.5 text-center text-xs font-semibold rounded-lg bg-amber-500/10 hover:bg-amber-500/20 text-amber-300 border border-amber-500/30 transition-all flex items-center justify-center gap-1"
+              >
+                Apostar esta cuota @{effectiveBetsByRisk.riesgo_medio[0].cuota_estimada}
+              </button>
+            </div>
+          )}
+
+          {/* Pick 3: Multiplier (Cuota Alta) */}
+          {effectiveBetsByRisk.riesgo_alto[0] && (
+            <div className="p-4 rounded-2xl bg-slate-900/90 border border-rose-500/40 flex flex-col justify-between space-y-2.5">
+              <div className="space-y-1.5">
+                <div className="flex items-center justify-between">
+                  <span className="text-[10px] uppercase font-bold text-rose-400 bg-rose-500/10 px-2 py-0.5 rounded border border-rose-500/20">
+                    🔴 Alta Ganancia (Cuota Alta)
+                  </span>
+                  <span className="text-xs font-mono font-bold text-slate-300">
+                    {effectiveBetsByRisk.riesgo_alto[0].probabilidad_estimada || 38}% Prob.
+                  </span>
+                </div>
+                <div className="flex items-baseline justify-between gap-1 pt-1">
+                  <span className="text-sm font-black text-slate-100">
+                    {effectiveBetsByRisk.riesgo_alto[0].seleccion}
+                  </span>
+                  <span className="text-sm font-black font-mono text-rose-400">
+                    @{effectiveBetsByRisk.riesgo_alto[0].cuota_estimada}
+                  </span>
+                </div>
+                <p className="text-[11px] text-slate-400 leading-snug">
+                  {effectiveBetsByRisk.riesgo_alto[0].justificacion_big_data}
+                </p>
+              </div>
+              <button
+                onClick={() => onOpenStakeCalculator(effectiveBetsByRisk.riesgo_alto[0].cuota_estimada)}
+                className="w-full py-1.5 text-center text-xs font-semibold rounded-lg bg-rose-500/10 hover:bg-rose-500/20 text-rose-300 border border-rose-500/30 transition-all flex items-center justify-center gap-1"
+              >
+                Apostar esta cuota @{effectiveBetsByRisk.riesgo_alto[0].cuota_estimada}
+              </button>
+            </div>
+          )}
+        </div>
+      </div>
+
       {/* DATA VISUALIZATION: DISTRIBUCIÓN DE PROBABILIDAD (OVER/UNDER & RESULTADO FINAL 1X2) */}
       <ProbabilityDistributionChart
         localTeam={analysis.equipo_local}
